@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CountdownSolver
 {
-    class DynamicSolver
+    public class DynamicSolver
     {
         public void Run(List<int> numbers, int target)
         {
@@ -43,5 +43,12 @@ namespace CountdownSolver
 
             return size2Operands;
         }
+
+        /*private List<Tuple<List<int>, List<int>>> GetSize3Operands(int[] orderedNumbers)
+        {
+            List<Tuple<List<int>, List<int>>> size3Operands = new List<Tuple<List<int>, List<int>>>();
+
+            List<Tuple<List<int>, List<int>>> size2Operands = GetSize2Operands(orderedNumbers);
+        }*/
     }
 }
