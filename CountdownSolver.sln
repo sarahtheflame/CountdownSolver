@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolver", "CountdownSolver\CountdownSolver.csproj", "{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolverTests", "CountdownSolverTests\CountdownSolverTests.csproj", "{04CB8443-7B07-441E-B129-62B87AABBD6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolverTests", "CountdownSolverTests\CountdownSolverTests.csproj", "{28B8038A-F157-4539-905B-2BED25F3DBEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04CB8443-7B07-441E-B129-62B87AABBD6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04CB8443-7B07-441E-B129-62B87AABBD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04CB8443-7B07-441E-B129-62B87AABBD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04CB8443-7B07-441E-B129-62B87AABBD6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
