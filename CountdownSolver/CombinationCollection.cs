@@ -10,20 +10,27 @@ namespace CountdownSolver
     public class CombinationCollection : IEnumerable<Combination>, IEnumerator<Combination>
     {
         private Combination combination;
+        private Combination initialCombination;
 
         object IEnumerator.Current => Current;
 
-        public Combination Current => combination;
+        public Combination Current
+        {
+            get
+            {
+                return new Combination(this.combination);
+            }
+            private set
+            {
+                this.combination = value;
+            }
+        }
 
         public CombinationCollection(int size, int[] numbersSet)
-            : this(new Combination(size, numbersSet))
         {
+            this.initialCombination = new Combination(size, numbersSet);
         }
 
-        public CombinationCollection(Combination startCombination)
-        {
-            this.combination = startCombination;
-        }
 
         public IEnumerator<Combination> GetEnumerator()
         {
@@ -32,12 +39,18 @@ namespace CountdownSolver
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            if (this.combination == null)
+            {
+                this.combination = new Combination(this.initialCombination);
+                return true;
+            }
+            this.combination++;
+            return !this.combination.Equals(this.initialCombination);
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            this.combination = this.initialCombination;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

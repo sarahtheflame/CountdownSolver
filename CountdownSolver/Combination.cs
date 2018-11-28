@@ -11,7 +11,7 @@ namespace CountdownSolver
     {
         private readonly int[] orderedNumbersSet;
         private readonly int[] consecutiveIdenticalNumbersCounts;
-        private int[] orderedNumbers;
+        public int[] OrderedNumbers { get; private set; }
 
         public Combination(int size, int[] numbersSet)
             : this(numbersSet.Take(size).ToArray(), numbersSet)
@@ -24,7 +24,7 @@ namespace CountdownSolver
             Debug.Assert(numbers.All(numbersSet.Contains), "Combination numbers must be part of numbers set");
 
             this.orderedNumbersSet = numbersSet.OrderBy(x => x).ToArray();
-            this.orderedNumbers = numbers.OrderBy(x => x).ToArray();
+            this.OrderedNumbers = numbers.OrderBy(x => x).ToArray();
 
             int[] differences = this.orderedNumbersSet.Zip(this.orderedNumbersSet.Skip(1), (first, second) => second - first).ToArray();
 
@@ -47,11 +47,18 @@ namespace CountdownSolver
             }
         }
 
+        public Combination(Combination combination)
+        {
+            this.consecutiveIdenticalNumbersCounts = combination.consecutiveIdenticalNumbersCounts;
+            this.OrderedNumbers = combination.OrderedNumbers;
+            this.orderedNumbersSet = combination.orderedNumbersSet;
+        }
+
         public static Combination operator++ (Combination combination)
         {
             for (int i = combination.Size -1; i >= 0; --i)
             {
-                int index = Array.IndexOf(combination.orderedNumbersSet, combination.orderedNumbers[i]);
+                int index = Array.IndexOf(combination.orderedNumbersSet, combination.OrderedNumbers[i]);
                 int consecutive = combination.consecutiveIdenticalNumbersCounts[index];
                 int nextIndex = index + consecutive + 1;
                 int remainingPositionsToFill = combination.Size - i;
@@ -59,14 +66,14 @@ namespace CountdownSolver
 
                 if (availableNumbers >= remainingPositionsToFill)
                 {
-                    IEnumerable<int> combinationBeginning = combination.orderedNumbers.Take(i);
+                    IEnumerable<int> combinationBeginning = combination.OrderedNumbers.Take(i);
                     IEnumerable<int> combinationEnding = combination.orderedNumbersSet.Skip(nextIndex).Take(remainingPositionsToFill);
-                    combination.orderedNumbers = combinationBeginning.Concat(combinationEnding).ToArray();
+                    combination.OrderedNumbers = combinationBeginning.Concat(combinationEnding).ToArray();
                     break;
                 }
                 else if (i == 0)
                 {
-                    combination.orderedNumbers = combination.orderedNumbersSet.Take(combination.Size).ToArray();
+                    combination.OrderedNumbers = combination.orderedNumbersSet.Take(combination.Size).ToArray();
                 }
 
             }
@@ -84,7 +91,7 @@ namespace CountdownSolver
             return !(combination1 == combination2);
         }
 
-        public int Size { get => this.orderedNumbers.Length; }
+        public int Size { get => this.OrderedNumbers.Length; }
 
         public int Dimension { get => this.orderedNumbersSet.Length; }
 
@@ -93,7 +100,7 @@ namespace CountdownSolver
             var combination = obj as Combination;
             return combination != null &&
                    Enumerable.SequenceEqual(orderedNumbersSet, combination.orderedNumbersSet) &&
-                   Enumerable.SequenceEqual(orderedNumbers, combination.orderedNumbers);
+                   Enumerable.SequenceEqual(OrderedNumbers, combination.OrderedNumbers);
         }
 
         public override int GetHashCode()
@@ -101,10 +108,15 @@ namespace CountdownSolver
             var hashCode = 1638634613;
             hashCode = hashCode * -1521134295 + EqualityComparer<int[]>.Default.GetHashCode(orderedNumbersSet);
             hashCode = hashCode * -1521134295 + EqualityComparer<int[]>.Default.GetHashCode(consecutiveIdenticalNumbersCounts);
-            hashCode = hashCode * -1521134295 + EqualityComparer<int[]>.Default.GetHashCode(orderedNumbers);
+            hashCode = hashCode * -1521134295 + EqualityComparer<int[]>.Default.GetHashCode(OrderedNumbers);
             hashCode = hashCode * -1521134295 + Size.GetHashCode();
             hashCode = hashCode * -1521134295 + Dimension.GetHashCode();
             return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return String.Join(",", this.OrderedNumbers);
         }
     }
 }
