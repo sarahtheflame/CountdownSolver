@@ -20,6 +20,18 @@ namespace CountdownSolver
             {
                 Combination combination = new Combination(new int[] { number }, numbers);
                 possibleResultsFromCombination[combination.ToString()] = new Dictionary<int, List<string>>() { { number, new List<string> { number.ToString() } } };
+
+                int newClosestResult = FindValueClosestToTarget(new List<int>() { closestResult, number }, target);
+                if (newClosestResult != closestResult)
+                {
+                    closestResult = newClosestResult;
+                    closestCombination = combination;
+                }
+
+                if (closestResult == target)
+                {
+                    return Tuple.Create(target, possibleResultsFromCombination[closestCombination.ToString()][target][0]);
+                }
             }
 
             for (int i = 2; i < numbers.Length + 1; ++i)
@@ -48,39 +60,9 @@ namespace CountdownSolver
                                 int rightValue = rightResult.Key;
                                 string rightExpression = rightResult.Value[0];
 
-                                int sum = leftValue + rightValue;
-                                AddResultSafely(possibleResultsFromCombination[combination.ToString()], sum, BuildExpression(leftExpression, rightExpression, "+"));
-                                possibleResults.Add(sum);
-
-                                int product = leftValue * rightValue;
-                                AddResultSafely(possibleResultsFromCombination[combination.ToString()], product, BuildExpression(leftExpression, rightExpression, "*"));
-                                possibleResults.Add(product);
-
-                                if (leftValue > rightValue)
-                                {
-                                    int difference = leftValue - rightValue;
-                                    AddResultSafely(possibleResultsFromCombination[combination.ToString()], difference, BuildExpression(leftExpression, rightExpression, "-"));
-                                    possibleResults.Add(difference);
-                                }
-                                else if (rightValue > leftValue)
-                                {
-                                    int difference = rightValue - leftValue;
-                                    AddResultSafely(possibleResultsFromCombination[combination.ToString()], difference, BuildExpression(rightExpression, leftExpression, "-"));
-                                    possibleResults.Add(difference);
-                                }
-
-                                if (leftValue % rightValue == 0)
-                                {
-                                    int quotient = leftValue / rightValue;
-                                    AddResultSafely(possibleResultsFromCombination[combination.ToString()], quotient, BuildExpression(leftExpression, rightExpression, "/"));
-                                    possibleResults.Add(quotient);
-                                }
-                                else if (rightValue % leftValue == 0)
-                                {
-                                    int quotient = rightValue / leftValue;
-                                    AddResultSafely(possibleResultsFromCombination[combination.ToString()], quotient, BuildExpression(rightExpression, leftExpression, "/"));
-                                    possibleResults.Add(quotient);
-                                }
+                                var possibleResultsWithJustifications = GetPossibleResultsWithJustifications(leftResult, rightResult);
+                                possibleResultsWithJustifications.ForEach(result => AddResultSafely(possibleResultsFromCombination[combination.ToString()], result.Item1, result.Item2));
+                                possibleResults.AddRange(possibleResultsWithJustifications.Select(x => x.Item1));
 
                                 int newClosestResult = FindValueClosestToTarget(possibleResults, target);
                                 if (newClosestResult != closestResult)
@@ -134,6 +116,46 @@ namespace CountdownSolver
             return closestValueToTarget;
         }
 
+        private List<Tuple<int, string>> GetPossibleResultsWithJustifications(KeyValuePair<int, List<string>> leftResult, KeyValuePair<int, List<string>> rightResult)
+        {
+            int leftValue = leftResult.Key;
+            int rightValue = rightResult.Key;
+            string leftExpression = leftResult.Value[0];
+            string rightExpression = rightResult.Value[0];
+            List<Tuple<int, string>> possibleResultsWithJustifications = new List<Tuple<int, string>>();
+
+            int sum = leftValue + rightValue;
+            possibleResultsWithJustifications.Add(Tuple.Create(sum, BuildExpression(leftExpression, rightExpression, "+")));
+
+            int product = leftValue * rightValue;
+            possibleResultsWithJustifications.Add(Tuple.Create(product, BuildExpression(leftExpression, rightExpression, "*")));
+
+            if (leftValue > rightValue)
+            {
+                int difference = leftValue - rightValue;
+                possibleResultsWithJustifications.Add(Tuple.Create(difference, BuildExpression(leftExpression, rightExpression, "-")));
+            }
+            else if (rightValue > leftValue)
+            {
+                int difference = rightValue - leftValue;
+                possibleResultsWithJustifications.Add(Tuple.Create(difference, BuildExpression(rightExpression, leftExpression, "-")));
+            }
+
+            if (leftValue % rightValue == 0)
+            {
+                int quotient = leftValue / rightValue;
+                possibleResultsWithJustifications.Add(Tuple.Create(quotient, BuildExpression(leftExpression, rightExpression, "/")));
+
+            }
+            else if (rightValue % leftValue == 0)
+            {
+                int quotient = rightValue / leftValue;
+                possibleResultsWithJustifications.Add(Tuple.Create(quotient, BuildExpression(rightExpression, leftExpression, "/")));
+            }
+
+            return possibleResultsWithJustifications;
+        }
+
         private List<Tuple<Combination, Combination>> SplitCombinationIntoOperandsList(Combination combination)
         {
             var partialOperands = new List<Tuple<List<int>, List<int>>>();
@@ -174,6 +196,8 @@ namespace CountdownSolver
                 return SplitNumbersIntoBuckets(newPartialOperandsList, remainingNumbers.Skip(1).ToList());
             }
         }
+
+
 
     }
 }
