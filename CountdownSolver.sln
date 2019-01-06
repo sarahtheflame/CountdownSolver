@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolver", "CountdownSolver\CountdownSolver.csproj", "{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountdownSolverTests", "CountdownSolverTests\CountdownSolverTests.csproj", "{28B8038A-F157-4539-905B-2BED25F3DBEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolverTests", "CountdownSolverTests\CountdownSolverTests.csproj", "{28B8038A-F157-4539-905B-2BED25F3DBEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolver.Core", "CountdownSolver.Core\CountdownSolver.Core.csproj", "{A7D74FE7-6326-4125-AA1C-D2ED3BB77D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownSolver.ConsoleApp", "CountdownSolver.ConsoleApp\CountdownSolver.ConsoleApp.csproj", "{5717CF7A-9D82-492F-892A-2F2081522616}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountdownSolver.Lambda", "CountdownSolver.Lambda\CountdownSolver.Lambda.csproj", "{7D2924DD-0C34-4C33-A6F2-742C500DA743}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountdownSolver.Lambda.Tests", "CountdownSolver.Lambda.Tests\CountdownSolver.Lambda.Tests.csproj", "{7EBED317-24CC-4F41-B4AF-6E68B4227046}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +19,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2C29FEC-4B1F-42A9-ACDE-61DA3BF13F44}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28B8038A-F157-4539-905B-2BED25F3DBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D74FE7-6326-4125-AA1C-D2ED3BB77D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D74FE7-6326-4125-AA1C-D2ED3BB77D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D74FE7-6326-4125-AA1C-D2ED3BB77D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D74FE7-6326-4125-AA1C-D2ED3BB77D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5717CF7A-9D82-492F-892A-2F2081522616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5717CF7A-9D82-492F-892A-2F2081522616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5717CF7A-9D82-492F-892A-2F2081522616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5717CF7A-9D82-492F-892A-2F2081522616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2924DD-0C34-4C33-A6F2-742C500DA743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2924DD-0C34-4C33-A6F2-742C500DA743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2924DD-0C34-4C33-A6F2-742C500DA743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2924DD-0C34-4C33-A6F2-742C500DA743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EBED317-24CC-4F41-B4AF-6E68B4227046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EBED317-24CC-4F41-B4AF-6E68B4227046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EBED317-24CC-4F41-B4AF-6E68B4227046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EBED317-24CC-4F41-B4AF-6E68B4227046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

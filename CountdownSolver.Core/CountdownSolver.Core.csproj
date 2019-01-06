@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Authors>Felix Vigneault and Sarah Laflamme</Authors>
+    <Company>CountdownSolver.Core</Company>
+  </PropertyGroup>
+
+</Project>
